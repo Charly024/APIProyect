@@ -1,0 +1,11 @@
+C:\Users\carlo\Documents\APIProyect\proyect44CPT\obj\Debug\proyect44CPT.csproj.AssemblyReference.cache
+C:\Users\carlo\Documents\APIProyect\proyect44CPT\obj\Debug\proyect44CPT.csproj.SuggestedBindingRedirects.cache
+C:\Users\carlo\Documents\APIProyect\proyect44CPT\obj\Debug\proyect44CPT.frmMain.resources
+C:\Users\carlo\Documents\APIProyect\proyect44CPT\obj\Debug\proyect44CPT.Properties.Resources.resources
+C:\Users\carlo\Documents\APIProyect\proyect44CPT\obj\Debug\proyect44CPT.csproj.GenerateResource.cache
+C:\Users\carlo\Documents\APIProyect\proyect44CPT\obj\Debug\proyect44CPT.csproj.CoreCompileInputs.cache
+C:\Users\carlo\Documents\APIProyect\proyect44CPT\bin\Debug\proyect44CPT.exe.config
+C:\Users\carlo\Documents\APIProyect\proyect44CPT\bin\Debug\proyect44CPT.exe
+C:\Users\carlo\Documents\APIProyect\proyect44CPT\bin\Debug\proyect44CPT.pdb
+C:\Users\carlo\Documents\APIProyect\proyect44CPT\obj\Debug\proyect44CPT.exe
+C:\Users\carlo\Documents\APIProyect\proyect44CPT\obj\Debug\proyect44CPT.pdb
