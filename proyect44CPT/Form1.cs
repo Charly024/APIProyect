@@ -78,7 +78,7 @@ namespace proyect44CPT
             //Latitude, longitude, timestamp attributes
             principal.latitude = double.Parse(numLatitude.Value.ToString());
             principal.longitude = double.Parse(numLongitude.Value.ToString());
-            principal.utcTimestamp = dtpTimeStamp.Value.ToString();
+            principal.utcTimestamp = String.Format("{0}-{1}-{2}T{3}",dtpTimeStamp.Value.ToString("yyyy"),dtpTimeStamp.Value.ToString("MM"),dtpTimeStamp.Value.ToString("dd"),dtpTimeStamp.Value.ToString("HH:mm:ss"));
 
             //-----SHIPMENTSTOPS-----
             principal.shipmentStops = new List<ShipmentStops>();
@@ -113,8 +113,8 @@ namespace proyect44CPT
                 //-----APPOINTMENTWINDOW-----
                 appointmentWindow = new AppointmentWindow()
                 {
-                    startDateTime = dtpStartDate.Value.ToString(),
-                    endDateTime = dtpEndDate.Value.ToString(),
+                    startDateTime = String.Format("{0}-{1}-{2}T{3}", dtpStartDate.Value.ToString("yyyy"), dtpStartDate.Value.ToString("MM"), dtpStartDate.Value.ToString("dd"), dtpStartDate.Value.ToString("HH:mm:ss")),
+                    endDateTime = String.Format("{0}-{1}-{2}T{3}", dtpEndDate.Value.ToString("yyyy"), dtpEndDate.Value.ToString("MM"), dtpEndDate.Value.ToString("dd"), dtpEndDate.Value.ToString("HH:mm:ss")),
                     localTimeZoneIdentifier = cboLocalTimeZone.SelectedItem.ToString()
                 },
                 //-----ADDRESS-----
@@ -127,7 +127,7 @@ namespace proyect44CPT
                     country = cboCountry.Text
                 },
                 //-----CONTACT-----
-                contact = chkContact.Checked? null:new Contact() 
+                contact = chkContact.Checked ? null : new Contact()
                 {
                     companyName = txtCompanyName.Text,
                     contactName = txtContactName.Text,
@@ -140,9 +140,9 @@ namespace proyect44CPT
                     faxNumberCountryCode = txtExtFax.Text
                 },
                 stopName = txtStopName.Text,
-                arrivalDateTime = dtpArrivalDate.Value.ToString(),
-                departureDateTime =dtpDepartureDate.Value.ToString()
-            });;
+                arrivalDateTime = String.Format("{0}-{1}-{2}T{3}", dtpArrivalDate.Value.ToString("yyyy"), dtpArrivalDate.Value.ToString("MM"), dtpArrivalDate.Value.ToString("dd"), dtpArrivalDate.Value.ToString("HH:mm:ss")),
+                departureDateTime = String.Format("{0}-{1}-{2}T{3}", dtpDepartureDate.Value.ToString("yyyy"), dtpDepartureDate.Value.ToString("MM"), dtpDepartureDate.Value.ToString("dd"), dtpDepartureDate.Value.ToString("HH:mm:ss"))
+            });
         }
 
         private void btnGenerateJson_Click(object sender, EventArgs e)
