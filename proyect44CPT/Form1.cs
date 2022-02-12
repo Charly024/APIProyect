@@ -53,6 +53,72 @@ namespace proyect44CPT
         {
             PeticionApi("Data");
         }
+
+        private void CrearJson()
+        {
+            EstructuraJson principal = new EstructuraJson();
+
+            //Objeto shippment
+
+            principal.latitude = double.Parse(numDataLatitude.Value.ToString());
+            principal.longitude = double.Parse(numDataLongitude.Value.ToString());
+            principal.utcTimestamp = dtpDataArrivalDateTime.Value.ToString();
+            principal.eventType = cboDataEvenType.SelectedItem.ToString();
+            principal.latestTemperature = double.Parse(numDataLatestTemperature.Value.ToString());
+            //principal.latestTemperatureUnit = cboDataLastetesTemperatureUnit.SelectedValue.ToString();
+            principal.hoursOfServiceRemaining = int.Parse(numDataHoursOfService.Value.ToString());
+            principal.customerId = txtDataCustomerId.Text;
+
+            principal.carrierIdentifier = new CarrierIdentifier()
+            {
+                type = txtDataCarrierType.Text,
+                value = txtDataCarrierID.Text
+            };
+
+            ShipmentIdentifiers shipmentIden = new ShipmentIdentifiers();
+            shipmentIden.type = txtDataShippmentType.Text;
+            shipmentIden.value = txtDataShippmentId.Text;
+
+            principal.shipmentIdentifiers = new List<ShipmentIdentifiers>();
+            principal.shipmentIdentifiers.Add(shipmentIden);
+
+            //-----APPOINTMENTWINDOW-----
+            AppointmentWindow appointmentWin = new AppointmentWindow();
+            appointmentWin.startDateTime = dtpDataStartDate.Value.ToString();
+            appointmentWin.endDateTime = dtpDataEndDate.Value.ToString();
+            //appointmentWin.localTimeZoneIdentifier = ;
+
+            //-----ADDRESS-----
+            Address address = new Address();
+            address.postalCode = txtDataPostalCode.Text;
+            //address.addressLines = 
+            address.city = txtDataCity.Text;
+            //address.state = cboDataState.SelectedItem.ToString();
+            //address.country = cboDataCountry.SelectedItem.ToString();
+
+            //-----CONTACT-----
+            Contact contact = new Contact();
+            contact.companyName = txtDataCompanyName.Text;
+            //contact.contactName =
+            //contact.phoneNumber =
+            //contact.phoneNumberCountryCode =
+            //contact.phoneNumber2 =
+            //contact.phoneNumberCountryCode2 =
+            //contact.email = 
+            //contact.faxNumber = 
+            //contact.faxNumberCountryCode = 
+
+            //-----SHIPMENTSTOPS-----
+
+            ShipmentStops newShipment = new ShipmentStops();
+            newShipment.stopNumber = txtDataStopNumber.Text;
+            new
+
+            string jsonString = JsonConvert.SerializeObject(principal);
+
+            MessageBox.Show(jsonString);
+
+        }
     }
 }
 
