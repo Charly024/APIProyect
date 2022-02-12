@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,13 +17,21 @@ namespace proyect44CPT
 {
     public partial class frmMain : Form
     {
+
+        List<ShipmentIdentifiers> shipmentIdentifiersList = new List<ShipmentIdentifiers>();
+        List<ShipmentStops> shipmentStopsLlist = new List<ShipmentStops>();
+
+
         public frmMain()
         {
-            InitializeComponent();
-
+            InitializeComponent(); 
+            cboUnit.SelectedIndex = 0;
+            cboCountry.SelectedIndex = 0;
+            cboLocalTimeZone.SelectedIndex = 0;
+            cboState.SelectedIndex = 0;
         }
       
-        private void PeticionApi(dynamic postData)
+        private string PeticionApi(string postData)
         {
             string username = "carriertesting@project44.com";
             string password = "IntegrationTesting";
@@ -46,7 +56,8 @@ namespace proyect44CPT
             }
             var response = (HttpWebResponse)request.GetResponse();
             var responseJSON = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            MessageBox.Show(responseJSON);
+
+            return responseJSON;
         }
 
         private void btnPeticion_Click(object sender, EventArgs e)
@@ -54,70 +65,95 @@ namespace proyect44CPT
             PeticionApi("Data");
         }
 
-        private void CrearJson()
+        private string GenerateJSON()
         {
             EstructuraJson principal = new EstructuraJson();
+            //Carrier Object
+            principal.carrierIdentifier = new CarrierIdentifier() { type = txtTypeCarrier.Text, value = txtValueCarrier.Text};
 
-            //Objeto shippment
-
-            principal.latitude = double.Parse(numDataLatitude.Value.ToString());
-            principal.longitude = double.Parse(numDataLongitude.Value.ToString());
-            principal.utcTimestamp = dtpDataArrivalDateTime.Value.ToString();
-            principal.eventType = cboDataEvenType.SelectedItem.ToString();
-            principal.latestTemperature = double.Parse(numDataLatestTemperature.Value.ToString());
-            //principal.latestTemperatureUnit = cboDataLastetesTemperatureUnit.SelectedValue.ToString();
-            principal.hoursOfServiceRemaining = int.Parse(numDataHoursOfService.Value.ToString());
-            principal.customerId = txtDataCustomerId.Text;
-
-            principal.carrierIdentifier = new CarrierIdentifier()
-            {
-                type = txtDataCarrierType.Text,
-                value = txtDataCarrierID.Text
-            };
-
-            ShipmentIdentifiers shipmentIden = new ShipmentIdentifiers();
-            shipmentIden.type = txtDataShippmentType.Text;
-            shipmentIden.value = txtDataShippmentId.Text;
-
+            //Shimpent Objet list
             principal.shipmentIdentifiers = new List<ShipmentIdentifiers>();
-            principal.shipmentIdentifiers.Add(shipmentIden);
+            principal.shipmentIdentifiers = shipmentIdentifiersList;
 
-            //-----APPOINTMENTWINDOW-----
-            AppointmentWindow appointmentWin = new AppointmentWindow();
-            appointmentWin.startDateTime = dtpDataStartDate.Value.ToString();
-            appointmentWin.endDateTime = dtpDataEndDate.Value.ToString();
-            //appointmentWin.localTimeZoneIdentifier = ;
-
-            //-----ADDRESS-----
-            Address address = new Address();
-            address.postalCode = txtDataPostalCode.Text;
-            //address.addressLines = 
-            address.city = txtDataCity.Text;
-            //address.state = cboDataState.SelectedItem.ToString();
-            //address.country = cboDataCountry.SelectedItem.ToString();
-
-            //-----CONTACT-----
-            Contact contact = new Contact();
-            contact.companyName = txtDataCompanyName.Text;
-            //contact.contactName =
-            //contact.phoneNumber =
-            //contact.phoneNumberCountryCode =
-            //contact.phoneNumber2 =
-            //contact.phoneNumberCountryCode2 =
-            //contact.email = 
-            //contact.faxNumber = 
-            //contact.faxNumberCountryCode = 
+            //Latitude, longitude, timestamp attributes
+            principal.latitude = double.Parse(numLatitude.Value.ToString());
+            principal.longitude = double.Parse(numLongitude.Value.ToString());
+            principal.utcTimestamp = dtpTimeStamp.Value.ToString();
 
             //-----SHIPMENTSTOPS-----
+            principal.shipmentStops = new List<ShipmentStops>();
+            principal.shipmentStops = shipmentStopsLlist;
 
-            ShipmentStops newShipment = new ShipmentStops();
-            newShipment.stopNumber = txtDataStopNumber.Text;
-            new
 
+            //Temperature, Unit, Hours remaing, Customer id attributes
+            principal.latestTemperature = double.Parse(numTemperature.Value.ToString());
+            principal.latestTemperatureUnit = cboUnit.SelectedItem.ToString();
+            principal.hoursOfServiceRemaining = int.Parse(numHoursRemaining.Value.ToString());
+            principal.customerId = txtCustomerId.Text;
+
+            //Serealizacion a JSON
             string jsonString = JsonConvert.SerializeObject(principal);
+            MessageBox.Show(JToken.Parse(jsonString).ToString());
 
-            MessageBox.Show(jsonString);
+            return jsonString;
+        }
 
+        private void btnAddShipment_Click(object sender, EventArgs e)
+        {
+            //Add Shipment Itedntifier
+            shipmentIdentifiersList.Add(new ShipmentIdentifiers() { type = txtTypeShipment.Text,value = txtValueShipment.Text});
+        }
+
+        private void btnAddStop_Click(object sender, EventArgs e)
+        {
+            //Add Shipment Stop
+            shipmentStopsLlist.Add(new ShipmentStops()
+            {
+                stopNumber = int.Parse(numStopNumber.Value.ToString()),
+                //-----APPOINTMENTWINDOW-----
+                appointmentWindow = new AppointmentWindow()
+                {
+                    startDateTime = dtpStartDate.Value.ToString(),
+                    endDateTime = dtpEndDate.Value.ToString(),
+                    localTimeZoneIdentifier = cboLocalTimeZone.SelectedItem.ToString()
+                },
+                //-----ADDRESS-----
+                address = new Address()
+                {
+                    postalCode = txtPostalCode.Text,
+                    addressLines = txtAddressLines.Text.Split('\n'),
+                    city = txtCity.Text,
+                    state = cboState.Text,
+                    country = cboCountry.Text
+                },
+                //-----CONTACT-----
+                contact = chkContact.Checked? null:new Contact() 
+                {
+                    companyName = txtCompanyName.Text,
+                    contactName = txtContactName.Text,
+                    phoneNumber = txtPhone1.Text,
+                    phoneNumberCountryCode = txtExt1.Text,
+                    phoneNumber2 = txtPhone2.Text,
+                    phoneNumber2CountryCode = txtExt2.Text,
+                    email = txtEmail.Text,
+                    faxNumber = txtFaxNumber.Text,
+                    faxNumberCountryCode = txtExtFax.Text
+                },
+                stopName = txtStopName.Text,
+                arrivalDateTime = dtpArrivalDate.Value.ToString(),
+                departureDateTime =dtpDepartureDate.Value.ToString()
+            });;
+        }
+
+        private void btnGenerateJson_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(GenerateJSON());
+        }
+
+        private void btnRequest_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(PeticionApi(GenerateJSON()));
+           
         }
     }
 }

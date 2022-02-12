@@ -20,3 +20,6 @@ C:\Users\carlo\Source\Repos\APIProyect\proyect44CPT\obj\Debug\proyect44CPT.cspro
 C:\Users\carlo\Source\Repos\APIProyect\proyect44CPT\obj\Debug\proyect44CPT.csproj.CoreCompileInputs.cache
 C:\Users\carlo\Source\Repos\APIProyect\proyect44CPT\obj\Debug\proyect44CPT.exe
 C:\Users\carlo\Source\Repos\APIProyect\proyect44CPT\obj\Debug\proyect44CPT.pdb
+C:\Users\carlo\Source\Repos\APIProyect\proyect44CPT\bin\Debug\Newtonsoft.Json.dll
+C:\Users\carlo\Source\Repos\APIProyect\proyect44CPT\bin\Debug\Newtonsoft.Json.xml
+C:\Users\carlo\Source\Repos\APIProyect\proyect44CPT\obj\Debug\proyect44CPT.csproj.CopyComplete
