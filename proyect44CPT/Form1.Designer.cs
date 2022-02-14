@@ -51,6 +51,7 @@
             this.label27 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.chkContact = new System.Windows.Forms.CheckBox();
             this.txtExtFax = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.txtFaxNumber = new System.Windows.Forms.TextBox();
@@ -100,7 +101,10 @@
             this.btnAddStop = new System.Windows.Forms.Button();
             this.btnRequest = new System.Windows.Forms.Button();
             this.btnGenerateJson = new System.Windows.Forms.Button();
-            this.chkContact = new System.Windows.Forms.CheckBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.cboType = new System.Windows.Forms.ComboBox();
+            this.txtJson = new System.Windows.Forms.TextBox();
+            this.btnCleanList = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numLatitude)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLongitude)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -351,6 +355,15 @@
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Contact";
+            // 
+            // chkContact
+            // 
+            this.chkContact.AutoSize = true;
+            this.chkContact.Location = new System.Drawing.Point(52, 0);
+            this.chkContact.Name = "chkContact";
+            this.chkContact.Size = new System.Drawing.Size(15, 14);
+            this.chkContact.TabIndex = 10;
+            this.chkContact.UseVisualStyleBackColor = true;
             // 
             // txtExtFax
             // 
@@ -694,7 +707,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(503, 13);
+            this.label28.Location = new System.Drawing.Point(453, 60);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(88, 13);
             this.label28.TabIndex = 16;
@@ -703,7 +716,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(428, 57);
+            this.label29.Location = new System.Drawing.Point(613, 11);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(26, 13);
             this.label29.TabIndex = 17;
@@ -712,7 +725,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(347, 58);
+            this.label30.Location = new System.Drawing.Point(532, 12);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(67, 13);
             this.label30.TabIndex = 18;
@@ -720,7 +733,7 @@
             // 
             // numHoursRemaining
             // 
-            this.numHoursRemaining.Location = new System.Drawing.Point(506, 28);
+            this.numHoursRemaining.Location = new System.Drawing.Point(456, 75);
             this.numHoursRemaining.Name = "numHoursRemaining";
             this.numHoursRemaining.Size = new System.Drawing.Size(82, 20);
             this.numHoursRemaining.TabIndex = 19;
@@ -732,7 +745,7 @@
             this.cboUnit.Items.AddRange(new object[] {
             "C",
             "F"});
-            this.cboUnit.Location = new System.Drawing.Point(431, 73);
+            this.cboUnit.Location = new System.Drawing.Point(616, 27);
             this.cboUnit.Name = "cboUnit";
             this.cboUnit.Size = new System.Drawing.Size(33, 21);
             this.cboUnit.TabIndex = 20;
@@ -740,7 +753,7 @@
             // numTemperature
             // 
             this.numTemperature.DecimalPlaces = 1;
-            this.numTemperature.Location = new System.Drawing.Point(350, 74);
+            this.numTemperature.Location = new System.Drawing.Point(535, 28);
             this.numTemperature.Maximum = new decimal(new int[] {
             200,
             0,
@@ -758,7 +771,7 @@
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(488, 58);
+            this.label31.Location = new System.Drawing.Point(545, 58);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(65, 13);
             this.label31.TabIndex = 22;
@@ -766,7 +779,7 @@
             // 
             // txtCustomerId
             // 
-            this.txtCustomerId.Location = new System.Drawing.Point(487, 74);
+            this.txtCustomerId.Location = new System.Drawing.Point(544, 74);
             this.txtCustomerId.Name = "txtCustomerId";
             this.txtCustomerId.Size = new System.Drawing.Size(100, 20);
             this.txtCustomerId.TabIndex = 23;
@@ -801,20 +814,58 @@
             this.btnGenerateJson.UseVisualStyleBackColor = true;
             this.btnGenerateJson.Click += new System.EventHandler(this.btnGenerateJson_Click);
             // 
-            // chkContact
+            // label33
             // 
-            this.chkContact.AutoSize = true;
-            this.chkContact.Location = new System.Drawing.Point(52, 0);
-            this.chkContact.Name = "chkContact";
-            this.chkContact.Size = new System.Drawing.Size(15, 14);
-            this.chkContact.TabIndex = 10;
-            this.chkContact.UseVisualStyleBackColor = true;
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(347, 59);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(31, 13);
+            this.label33.TabIndex = 27;
+            this.label33.Text = "Type";
+            // 
+            // cboType
+            // 
+            this.cboType.FormattingEnabled = true;
+            this.cboType.Items.AddRange(new object[] {
+            "DELIVERED",
+            "CANCELLED",
+            "DEPARTED",
+            "ARRIVED",
+            "DISPATCHED",
+            "LOADING",
+            "UNLOADING"});
+            this.cboType.Location = new System.Drawing.Point(350, 75);
+            this.cboType.Name = "cboType";
+            this.cboType.Size = new System.Drawing.Size(83, 21);
+            this.cboType.TabIndex = 28;
+            // 
+            // txtJson
+            // 
+            this.txtJson.Location = new System.Drawing.Point(692, 160);
+            this.txtJson.Multiline = true;
+            this.txtJson.Name = "txtJson";
+            this.txtJson.Size = new System.Drawing.Size(206, 129);
+            this.txtJson.TabIndex = 29;
+            // 
+            // btnCleanList
+            // 
+            this.btnCleanList.Location = new System.Drawing.Point(224, 100);
+            this.btnCleanList.Name = "btnCleanList";
+            this.btnCleanList.Size = new System.Drawing.Size(75, 23);
+            this.btnCleanList.TabIndex = 30;
+            this.btnCleanList.Text = "LIMPIAR SHIP";
+            this.btnCleanList.UseVisualStyleBackColor = true;
+            this.btnCleanList.Click += new System.EventHandler(this.btnCleanList_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(674, 508);
+            this.ClientSize = new System.Drawing.Size(1042, 508);
+            this.Controls.Add(this.btnCleanList);
+            this.Controls.Add(this.txtJson);
+            this.Controls.Add(this.cboType);
+            this.Controls.Add(this.label33);
             this.Controls.Add(this.btnGenerateJson);
             this.Controls.Add(this.btnRequest);
             this.Controls.Add(this.btnAddStop);
@@ -937,6 +988,10 @@
         private System.Windows.Forms.TextBox txtStopName;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.CheckBox chkContact;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.ComboBox cboType;
+        private System.Windows.Forms.TextBox txtJson;
+        private System.Windows.Forms.Button btnCleanList;
     }
 }
 

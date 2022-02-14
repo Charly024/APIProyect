@@ -37,7 +37,7 @@ namespace proyect44CPT
             string password = "IntegrationTesting";
 
             var request = (HttpWebRequest)WebRequest.Create("https://cloud.p-44.com/api/carriers/v2/tl/shipments/statusUpdates");
-            postData = "{\"shipmentIdentifiers\":[{\"type\":\"ORDER\",\"value\":\"8476916336\"}],\"latitude\":41.8885,\"longitude\":-87.6354,\"utcTimestamp\":\"2019-01-28T18:35:58\",\"eventType\":\"DELIVERED\",\"customerId\":\"12345\"}";
+            //postData = "{\"shipmentIdentifiers\":[{\"type\":\"ORDER\",\"value\":\"8476916336\"}],\"latitude\":41.8885,\"longitude\":-87.6354,\"utcTimestamp\":\"2019-01-28T18:35:58\",\"eventType\":\"DELIVERED\",\"customerId\":\"12345\"}";
             
             var data = Encoding.ASCII.GetBytes(postData);
 
@@ -54,7 +54,10 @@ namespace proyect44CPT
             {
                 stream.Write(data, 0, data.Length);
             }
+            
             var response = (HttpWebResponse)request.GetResponse();
+            
+            
             var responseJSON = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
             return responseJSON;
@@ -79,7 +82,7 @@ namespace proyect44CPT
             principal.latitude = double.Parse(numLatitude.Value.ToString());
             principal.longitude = double.Parse(numLongitude.Value.ToString());
             principal.utcTimestamp = String.Format("{0}-{1}-{2}T{3}",dtpTimeStamp.Value.ToString("yyyy"),dtpTimeStamp.Value.ToString("MM"),dtpTimeStamp.Value.ToString("dd"),dtpTimeStamp.Value.ToString("HH:mm:ss"));
-
+            principal.eventType = cboType.SelectedItem.ToString();
             //-----SHIPMENTSTOPS-----
             principal.shipmentStops = new List<ShipmentStops>();
             principal.shipmentStops = shipmentStopsLlist;
@@ -148,12 +151,18 @@ namespace proyect44CPT
         private void btnGenerateJson_Click(object sender, EventArgs e)
         {
             MessageBox.Show(GenerateJSON());
+            txtJson.Text = GenerateJSON();
         }
 
         private void btnRequest_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(PeticionApi(GenerateJSON()));
+            MessageBox.Show(PeticionApi(GenerateJSON()),"Aceptado",MessageBoxButtons.OK,MessageBoxIcon.Information);
            
+        }
+
+        private void btnCleanList_Click(object sender, EventArgs e)
+        {
+            shipmentIdentifiersList.Clear();
         }
     }
 }

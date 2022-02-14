@@ -14,6 +14,7 @@ namespace proyect44CPT
             public double latitude { get; set; }
             public double longitude { get; set; }
             public string utcTimestamp { get; set; }
+            public string eventType { get; set; }
             public IList<ShipmentStops> shipmentStops { get; set; }
             public double latestTemperature { get; set; }
             public string latestTemperatureUnit { get; set; }
